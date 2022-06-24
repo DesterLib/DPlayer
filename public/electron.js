@@ -1,7 +1,7 @@
 const { app, BrowserWindow, protocol } = require("electron");
 const path = require("path");
 const url = require("url");
-const { getPluginEntry } = require("mpv.js");
+const { getPluginEntry } = require("@desterlib/mpv");
 
 let os;
 switch (process.platform) {
@@ -13,7 +13,7 @@ switch (process.platform) {
     break;
 }
 
-const pdir = path.join(__dirname, "..", "mpv", os);
+const pdir = path.join(__dirname, "..", "node_modules", "@desterlib", "mpv", "dist");
 
 if (process.platform !== "linux") {
   process.chdir(pdir);

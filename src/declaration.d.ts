@@ -1,2 +1,2 @@
-declare module "mpv.js";
+declare module "@desterlib/mpv";
 declare module "*.css";

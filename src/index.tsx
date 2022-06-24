@@ -8,7 +8,7 @@ import "./styles/nprogress.css";
 import "./styles/seekbar.css";
 import "./styles/utils.css";
 
-const isDev: boolean = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
+const isDev: boolean = process.env.REACT_APP_ENVIRONMENT === "electron";
 
 const DMPV = () => {
   return (

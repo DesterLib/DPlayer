@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactMPV } from "mpv.js";
+import { ReactMPV } from "@desterlib/mpv";
 import Grid from "@mui/material/Grid";
 import { VideoSeekSlider } from "./seekbar";
 import VolumeCtrl from "./volume_ctrl";
