@@ -1,9 +1,9 @@
 {
   "name": "@desterlib/dplayer",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "description": "Dester's desktop video player",
   "license": "MIT",
-  "main": "public/electron.js",
+  "main": "dist/index.js",
   "scripts": {
     "prestart": "npm pkg set main=public/electron.js",
     "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
@@ -19,10 +19,11 @@
     "build:post": {
       "darwin": "cp -r src/styles dist/styles",
       "linux": "cp -r src/styles dist/styles",
-      "win32": "robocopy src/styles dist/styles || exit 0"
+      "win32": "robocopy src/styles dist/styles & robocopy node_modules/@desterlib/mpv/dist dist mpv-1.dll mpvjs.node || exit 0"
     }
   },
   "dependencies": {
+    "@desterlib/mpv": "^0.34.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.5",
@@ -33,7 +34,6 @@
     "typescript": "^4.7.2"
   },
   "devDependencies": {
-    "@desterlib/mpv": "^0.34.3",
     "@types/react-dom": "^18.0.5",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",

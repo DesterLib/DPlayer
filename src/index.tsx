@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RecoilRoot } from "recoil";
+const { getPluginEntry } = require("@desterlib/mpv");
 import PlayerBar from "./components/player_bar";
 import "./styles/index.css";
 import "./styles/animation.css";
@@ -10,7 +11,7 @@ import "./styles/utils.css";
 
 const isDev: boolean = process.env.REACT_APP_ENVIRONMENT === "electron";
 
-const DMPV = () => {
+const DPlayer = () => {
   return (
     <RecoilRoot>
       <PlayerBar />
@@ -20,8 +21,10 @@ const DMPV = () => {
 
 if (isDev) {
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <DMPV />
+    <DPlayer />
   );
 }
 
-export default DMPV;
+export { getPluginEntry };
+
+export default DPlayer;
