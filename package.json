@@ -1,6 +1,6 @@
 {
   "name": "@desterlib/dplayer",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Dester's desktop video player",
   "license": "MIT",
   "main": "dist/index.js",

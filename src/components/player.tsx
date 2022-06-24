@@ -11,12 +11,13 @@ import Subtitle from "./subtitle";
 import Fullscreen from "./fullscreen";
 
 type Props = {
-  showTitle: string;
-  episodeTitle: string;
-  episodeId: string;
+  url: string,
+  title: string;
+  subTitle: string;
+  id: string;
   fullscreen: boolean;
   timePos: number;
-  episodeSize: number;
+  size: number;
 };
 
 type State = {
@@ -24,7 +25,7 @@ type State = {
   "time-pos": number;
   duration: number;
   fullscreen: boolean;
-  volume_value: number;
+  volume: number;
   active: boolean;
 };
 
@@ -43,7 +44,7 @@ class Player extends React.Component<Props, State> {
       "time-pos": this.props.timePos,
       duration: 100,
       fullscreen: this.props.fullscreen,
-      volume_value: 20,
+      volume: 20,
       active: true,
     };
     this.playerContainerEl = React.createRef();
@@ -59,8 +60,8 @@ class Player extends React.Component<Props, State> {
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    if (this.props.episodeId !== nextProps.episodeId) {
-      this.mpv.command("loadfile", "https://dl5.webmfiles.org/video-h265.mkv");
+    if (this.props.id !== nextProps.id) {
+      this.mpv.command("loadfile", this.props.url);
     }
     return true;
   }
@@ -76,12 +77,12 @@ class Player extends React.Component<Props, State> {
     const observe = mpv.observe.bind(mpv);
     ["pause", "time-pos", "duration", "eof-reached"].forEach(observe);
     this.mpv.property("hwdec", "auto");
-    this.mpv.command("set", "ao-volume", this.state.volume_value);
+    this.mpv.command("set", "ao-volume", this.state.volume);
     this.handleEpisodeChange(
-      this.props.episodeId,
-      this.props.episodeTitle,
+      this.props.id,
+      this.props.subTitle,
       this.state["time-pos"],
-      this.props.episodeSize
+      this.props.size
     );
   };
 
@@ -154,13 +155,13 @@ class Player extends React.Component<Props, State> {
     size: number
   ) => {
     if (!this.mpv) return;
-    this.mpv.command("loadfile", "https://dl5.webmfiles.org/video-h265.mkv");
+    this.mpv.command("loadfile", this.props.url);
     this.mpv.property("time-pos", timePos);
   };
 
   handleVolumeChange = (nv: number) => {
     if (!this.mpv) return;
-    this.setState({ volume_value: nv });
+    this.setState({ volume: nv });
     this.mpv.command("set", "ao-volume", nv);
   };
 
@@ -227,7 +228,7 @@ class Player extends React.Component<Props, State> {
                       sx={{ justifyContent: "center", alignItems: "center" }}
                     >
                       <VolumeCtrl
-                        value={this.state.volume_value}
+                        value={this.state.volume}
                         setVolume={this.handleVolumeChange}
                         color="white"
                       />
@@ -290,7 +291,7 @@ class Player extends React.Component<Props, State> {
         >
           <Play pause={this.state.pause} togglePause={this.togglePause} />
           <VolumeCtrl
-            value={this.state.volume_value}
+            value={this.state.volume}
             setVolume={this.handleVolumeChange}
           />
           <div
@@ -308,7 +309,7 @@ class Player extends React.Component<Props, State> {
             <div
               style={{ width: "85%", margin: "0 auto", textAlign: "center" }}
             >
-              <p style={{ margin: 0 }}>{this.props.episodeTitle}</p>
+              <p style={{ margin: 0 }}>{this.props.subTitle}</p>
               <VideoSeekSlider
                 max={this.state.duration}
                 currentTime={this.state["time-pos"]}
@@ -319,7 +320,7 @@ class Player extends React.Component<Props, State> {
                 minutesPrefix="00:"
                 thumbnailURL={"."}
               />
-              <p style={{ margin: 0 }}>{this.props.showTitle}</p>
+              <p style={{ margin: 0 }}>{this.props.title}</p>
             </div>
             <Duration seconds={this.state.duration} />
           </div>

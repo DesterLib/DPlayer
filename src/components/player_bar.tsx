@@ -4,23 +4,25 @@ import Player from "./player";
 import { atom, useRecoilValue } from "recoil";
 
 export type PlayerState = {
-  showTitle: string;
-  episodeTitle: string;
+  url: string;
+  title: string;
+  subTitle: string;
   fullscreen: boolean;
-  episodeId: string;
+  id: string;
   timePos: number;
-  episodeSize: number;
+  size: number;
 };
 
 export const playerState = atom({
   key: "playerState",
   default: {
-    showTitle: "Test",
-    episodeTitle: "Test",
+    url: "https://dl5.webmfiles.org/video-h265.mkv",
+    title: "Test",
+    subTitle: "Test",
     fullscreen: false,
-    episodeId: "",
+    id: "",
     timePos: 0,
-    episodeSize: 0,
+    size: 0,
   },
 });
 
@@ -32,12 +34,13 @@ export default function PlayerBar() {
       {state && (
         <Paper elevation={0}>
           <Player
-            showTitle={state.showTitle}
-            episodeTitle={state.episodeTitle}
+            url={state.url}
+            title={state.title}
+            subTitle={state.subTitle}
             fullscreen={state.fullscreen}
-            episodeId={state.episodeId}
+            id={state.id}
             timePos={state.timePos}
-            episodeSize={state.episodeSize}
+            size={state.size}
           />
         </Paper>
       )}
