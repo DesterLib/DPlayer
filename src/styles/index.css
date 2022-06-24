@@ -1,0 +1,209 @@
+@import url("https://rsms.me/inter/inter.css");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+:root {
+  --primary-color: #2196f3;
+  --scrollbarBG: #f2f3f5;
+  --thumbBG: #e3e5e8;
+}
+
+.light {
+  display: flex;
+  --scrollbarBG: #f2f3f5;
+  --thumbBG: #e3e5e8;
+}
+
+.dark {
+  display: flex;
+  --scrollbarBG: #2f3136;
+  --thumbBG: #202225;
+}
+
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  border: none;
+  background: var(--scrollbarBG);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: var(--thumbBG);
+  border: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 65px;
+}
+
+.banner {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  background: linear-gradient(70deg, rgb(0, 0, 0), transparent);
+}
+.details {
+  max-width: 100%;
+  padding-top: 10px;
+}
+
+.info {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.info-poster {
+  height: 170px;
+  border-radius: 8px;
+}
+
+.show-title {
+  margin: 0;
+}
+
+.imdb-info {
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+
+.imdb-info > * {
+  word-wrap: wrap;
+}
+
+.episode-list {
+  width: 100%;
+  padding-left: 20px;
+}
+
+.mini-player {
+  width: 240px;
+  height: 135px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000000;
+}
+
+.dark-overlay {
+  width: 240px;
+  height: 135px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: rgba(0, 0, 0, 0.438);
+  opacity: 0;
+  transition: opacity 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.dark-overlay:hover {
+  opacity: 1;
+}
+
+.banner-img {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+}
+
+input:focus {
+  outline: none;
+}
+
+.controls {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0px;
+  width: inherit;
+  transition: all 300ms ease-in-out;
+  height: inherit;
+  background: rgba(0, 0, 0, 0.171);
+  opacity: 0;
+}
+
+.controls-bot-container {
+  width: 100%;
+  height: inherit;
+  position: relative;
+}
+
+.controls-bot {
+  position: absolute;
+  bottom: 5px;
+  width: inherit;
+}
+
+.mpv-player {
+  width: 100%;
+  height: inherit;
+  position: relative;
+}
+
+.controls:hover {
+  opacity: 1;
+}
+
+.volume-slider {
+  width: 150px;
+  padding-top: 4px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.webfullscreen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 1202;
+}
+
+.player {
+  width: 160px;
+  height: 90px;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000000000;
+}
+
+.poster {
+  cursor: "pointer";
+}

@@ -1,0 +1,66 @@
+{
+  "name": "@desterlib/dplayer",
+  "version": "0.0.1",
+  "description": "Dester's desktop video player",
+  "license": "MIT",
+  "main": "public/electron.js",
+  "scripts": {
+    "prestart": "npm pkg set main=public/electron.js",
+    "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "prepublish": "npm pkg set main=dist/index.js",
+    "build": "rmdir /Q /S dist & tsc & robocopy src/styles dist/styles"
+  },
+  "dependencies": {
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/material": "^5.8.5",
+    "@types/node": "^16.11.36",
+    "@types/react": "^18.0.14",
+    "mpv.js": "github:DesterLib/mpv.js",
+    "react": "^18.1.0",
+    "recoil": "^0.7.4",
+    "typescript": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^18.0.5",
+    "concurrently": "^7.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^19.0.6",
+    "electronmon": "^2.0.2",
+    "path-browserify": "^1.0.1",
+    "react-app-rewired": "^2.2.1",
+    "react-dom": "^18.2.0",
+    "wait-on": "^6.0.1"
+  },
+  "contributors": [
+    {
+      "name": "Elias Benbourenane",
+      "email": "me@elias.eu.org",
+      "url": "https://elias.eu.org"
+    },
+    {
+      "name": "Alken D",
+      "email": "desteralken@gmail.com",
+      "url": "https://github.com/AlkenD"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DesterLib/DPlayer.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
