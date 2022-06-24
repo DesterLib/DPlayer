@@ -7,8 +7,20 @@
   "scripts": {
     "prestart": "npm pkg set main=public/electron.js",
     "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
-    "prepublish": "npm pkg set main=dist/index.js",
-    "build": "rmdir /Q /S dist & tsc & robocopy src/styles dist/styles"
+    "build": "cross-os build:pre && tsc && cross-os build:post",
+    "publish": "npm run build && npm pkg set main=dist/index.js && npm publish"
+  },
+  "cross-os": {
+    "build:pre": {
+      "darwin": "rm -rf dist",
+      "linux": "rm -rf dist",
+      "win32": "rmdir /Q /S dist || exit 0"
+    },
+    "build:post": {
+      "darwin": "cp -r src/styles dist/styles",
+      "linux": "cp -r src/styles dist/styles",
+      "win32": "robocopy src/styles dist/styles || exit 0"
+    }
   },
   "dependencies": {
     "@emotion/styled": "^11.9.3",
@@ -25,6 +37,7 @@
     "@types/react-dom": "^18.0.5",
     "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
+    "cross-os": "^1.5.0",
     "electron": "^19.0.6",
     "electronmon": "^2.0.2",
     "path-browserify": "^1.0.1",
