@@ -44,7 +44,7 @@ class Player extends React.Component<Props, State> {
       "time-pos": this.props.timePos,
       duration: 100,
       fullscreen: this.props.fullscreen,
-      volume: 20,
+      volume: 100,
       active: true,
     };
     this.playerContainerEl = React.createRef();
