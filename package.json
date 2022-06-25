@@ -1,14 +1,14 @@
 {
     "name": "@desterlib/dplayer",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "Dester's desktop video player",
     "license": "MIT",
-    "main": "public/electron.js",
+    "main": "dist/index.js",
     "scripts": {
         "prestart": "npm pkg set main=public/electron.js",
         "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
         "build": "cross-os build:pre && tsc && cross-os build:post",
-        "publish": "npm run build && npm pkg set main=dist/index.js && npm publish",
+        "release": "npm run build && npm pkg set main=dist/index.js && npm publish",
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
         "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
         "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
@@ -17,22 +17,22 @@
         "build:pre": {
             "darwin": "rm -rf dist",
             "linux": "rm -rf dist",
-            "win32": "rmdir /Q /S dist || exit 0"
+            "win32": "rd /s /q dist || exit 0"
         },
         "build:post": {
-            "darwin": "cp -r src/styles dist/styles",
-            "linux": "cp -r src/styles dist/styles",
+            "darwin": "cp -r src/styles dist/styles && cp node_modules/@desterlib/mpv/dist/{mpv-1.dll,mpvjs.node} dist",
+            "linux": "cp -r src/styles dist/styles && cp node_modules/@desterlib/mpv/dist/{mpv-1.dll,mpvjs.node} dist",
             "win32": "robocopy src/styles dist/styles & robocopy node_modules/@desterlib/mpv/dist dist mpv-1.dll mpvjs.node || exit 0"
         }
     },
     "dependencies": {
-        "@desterlib/mpv": "^0.34.3",
-        "@emotion/styled": "^11.9.3",
+        "@desterlib/mpv": "^0.34.4",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
+        "@mui/styled-engine": "^5.8.0",
         "@types/node": "^16.11.36",
         "@types/react": "^18.0.14",
-        "react": "^18.1.0",
+        "react": "^18.2.0",
         "typescript": "^4.7.2"
     },
     "devDependencies": {

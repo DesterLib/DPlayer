@@ -10,7 +10,7 @@ type Props = {
     color?: string;
 };
 
-function VolumeCtrl({ value, setVolume, color }: Props) {
+const Volume = ({ value, setVolume, color }: Props) => {
     const toggleMute = () => {
         if (value > 0) setVolume(0);
         else setVolume(50);
@@ -51,6 +51,6 @@ function VolumeCtrl({ value, setVolume, color }: Props) {
             />
         </div>
     );
-}
+};
 
-export default memo(VolumeCtrl);
+export default memo(Volume);

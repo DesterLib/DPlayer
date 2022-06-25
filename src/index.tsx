@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Player from './components/player';
+import Player from './components/Player';
 import './styles/animation.css';
 import './styles/index.css';
 import './styles/nprogress.css';
