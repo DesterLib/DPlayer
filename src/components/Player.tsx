@@ -11,7 +11,7 @@ import Timer from './Timer';
 import Volume from './Volume';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { ReactMPV } = require('@desterlib/mpv');
+import MPV from './MPV';
 
 type Props = {
     url: string;
@@ -190,7 +190,7 @@ class Player extends React.Component<Props, State> {
                 style={{ cursor: this.state.active ? 'default' : 'none' }}
             >
                 <div className='mpv-player'>
-                    <ReactMPV
+                    <MPV
                         onReady={this.handleMPVReady}
                         onPropertyChange={this.handlePropertyChange}
                         onMouseDown={this.togglePause}

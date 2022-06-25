@@ -8,9 +8,6 @@ import './styles/nprogress.css';
 import './styles/seekbar.css';
 import './styles/utils.css';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { getPluginEntry } = require('@desterlib/mpv');
-
 type Props = {
     url: string;
     title?: string;
@@ -46,7 +43,5 @@ if (process.env.REACT_APP_ENVIRONMENT === 'electron') {
         />,
     );
 }
-
-export { getPluginEntry };
 
 export default DPlayer;

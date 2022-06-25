@@ -1,7 +1,8 @@
+/* eslint-disable */
+
 const { app, BrowserWindow, protocol } = require('electron');
 const path = require('path');
 const url = require('url');
-const { getPluginEntry } = require('@desterlib/mpv');
 
 let os;
 switch (process.platform) {
@@ -13,7 +14,40 @@ switch (process.platform) {
         break;
 }
 
-const pdir = path.join(__dirname, '..', 'node_modules', '@desterlib', 'mpv', 'dist');
+const PLUGIN_MIME_TYPE = "application/x-mpvjs";
+
+function containsNonASCII(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getPluginEntry(pluginDir, pluginName = 'mpvjs.node') {
+    const fullPluginPath = path.join(pluginDir, pluginName);
+    let pluginPath = path.relative(process.cwd(), fullPluginPath);
+    if (path.dirname(pluginPath) === '.') {
+        if (process.platform === 'linux') {
+            pluginPath = `.${path.sep}${pluginPath}`;
+        }
+    } else {
+        if (process.platform === 'win32') {
+            pluginPath = fullPluginPath;
+        }
+    }
+    if (containsNonASCII(pluginPath)) {
+        if (containsNonASCII(fullPluginPath)) {
+            throw new Error('Non-ASCII plugin path is not supported');
+        } else {
+            pluginPath = fullPluginPath;
+        }
+    }
+    return `${pluginPath};${PLUGIN_MIME_TYPE}`;
+}
+
+const pdir = path.join(__dirname, '..', 'libs');
 
 if (process.platform !== 'linux') {
     process.chdir(pdir);

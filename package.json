@@ -1,10 +1,11 @@
 {
     "name": "@desterlib/dplayer",
-    "version": "0.0.12",
+    "version": "0.0.16",
     "description": "Dester's desktop video player",
     "license": "MIT",
     "main": "dist/index.js",
     "scripts": {
+        "install": "echo",
         "prestart": "npm pkg set main=public/electron.js",
         "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
         "build": "cross-os build:pre && tsc && cross-os build:post",
@@ -20,13 +21,12 @@
             "win32": "rd /s /q dist || exit 0"
         },
         "build:post": {
-            "darwin": "cp -r src/styles dist/styles && cp node_modules/@desterlib/mpv/dist/{mpv-1.dll,mpvjs.node} dist",
-            "linux": "cp -r src/styles dist/styles && cp node_modules/@desterlib/mpv/dist/{mpv-1.dll,mpvjs.node} dist",
-            "win32": "robocopy src/styles dist/styles & robocopy node_modules/@desterlib/mpv/dist dist mpv-1.dll mpvjs.node || exit 0"
+            "darwin": "cp -r src/styles dist/styles && cp libs/{mpv-1.dll,mpvjs.node} dist",
+            "linux": "cp -r src/styles dist/styles && cp libs/{mpv-1.dll,mpvjs.node} dist",
+            "win32": "robocopy src/styles dist/styles & robocopy libs dist mpv-1.dll mpvjs.node || exit 0"
         }
     },
     "dependencies": {
-        "@desterlib/mpv": "^0.34.4",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",
