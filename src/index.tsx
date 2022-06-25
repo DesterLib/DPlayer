@@ -1,52 +1,50 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { RecoilRoot } from "recoil";
-const { getPluginEntry } = require("@desterlib/mpv");
-import Player from "./components/player";
-import "./styles/index.css";
-import "./styles/animation.css";
-import "./styles/nprogress.css";
-import "./styles/seekbar.css";
-import "./styles/utils.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import Player from './components/player';
+import './styles/animation.css';
+import './styles/index.css';
+import './styles/nprogress.css';
+import './styles/seekbar.css';
+import './styles/utils.css';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { getPluginEntry } = require('@desterlib/mpv');
 
 type Props = {
-  url: string;
-  title?: string;
-  subTitle?: string;
-  id?: string;
-  fullscreen?: boolean;
-  timePos?: number;
-  size?: number;
+    url: string;
+    title?: string;
+    subTitle?: string;
+    id?: string;
+    fullscreen?: boolean;
+    timePos?: number;
+    size?: number;
 };
 
-const DPlayer = ({
-  url,
-  title,
-  subTitle,
-  id,
-  fullscreen,
-  timePos,
-  size,
-}: Props) => {
-  return (
-    <RecoilRoot>
-      <Player
-        url={url}
-        title={title || ""}
-        subTitle={subTitle || ""}
-        id={id || ""}
-        fullscreen={fullscreen || false}
-        timePos={timePos || 0}
-        size={size || 0}
-      />
-    </RecoilRoot>
-  );
+const DPlayer = ({ url, title, subTitle, id, fullscreen, timePos, size }: Props) => {
+    return (
+        <Player
+            url={url}
+            title={title || ''}
+            subTitle={subTitle || ''}
+            id={id || ''}
+            fullscreen={fullscreen || false}
+            timePos={timePos || 0}
+            size={size || 0}
+        />
+    );
 };
 
-if (process.env.REACT_APP_ENVIRONMENT === "electron") {
-  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <DPlayer url="https://dl5.webmfiles.org/video-h265.mkv" title="Test" subTitle="Test2" id={""} fullscreen={false} />
-  );
+if (process.env.REACT_APP_ENVIRONMENT === 'electron') {
+    ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+        <DPlayer
+            url='https://dl5.webmfiles.org/video-h265.mkv'
+            title='Test'
+            subTitle='Test2'
+            id={''}
+            fullscreen={false}
+        />,
+    );
 }
 
 export { getPluginEntry };
