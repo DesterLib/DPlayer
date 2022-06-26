@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PLUGIN_MIME_TYPE = 'application/x-mpvjs';
+const PLUGIN_MIME_TYPE = 'application/x-mpv';
 
 type Props = {
     className?: string;

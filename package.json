@@ -1,6 +1,6 @@
 {
     "name": "@desterlib/dplayer",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "Dester's desktop video player",
     "license": "MIT",
     "main": "dist/index.js",
@@ -21,12 +21,13 @@
             "win32": "rd /s /q dist || exit 0"
         },
         "build:post": {
-            "darwin": "cp -r src/styles dist/styles && cp libs/{mpv-1.dll,mpvjs.node} dist",
-            "linux": "cp -r src/styles dist/styles && cp libs/{mpv-1.dll,mpvjs.node} dist",
-            "win32": "robocopy src/styles dist/styles & robocopy libs dist mpv-1.dll mpvjs.node || exit 0"
+            "darwin": "cp -r src/styles dist/styles",
+            "linux": "cp -r src/styles dist/styles",
+            "win32": "robocopy src/styles dist/styles || exit 0"
         }
     },
     "dependencies": {
+        "@desterlib/mpv": "^0.34.9",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",

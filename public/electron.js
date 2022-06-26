@@ -14,19 +14,22 @@ switch (process.platform) {
         break;
 }
 
-const PLUGIN_MIME_TYPE = "application/x-mpvjs";
+const pluginDir = path.join(path.dirname(require.resolve("@desterlib/mpv")), "dist");
+if (process.platform !== 'linux') process.chdir(pluginDir);
 
-function containsNonASCII(str) {
-    for (let i = 0; i < str.length; i++) {
-        if (str.charCodeAt(i) > 255) {
-            return true;
+const getPluginEntry = (pluginDir, pluginName = 'mpv.node') => {
+    const containsNonASCII = (str) => {
+        for (let i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 255) {
+                return true;
+            }
         }
-    }
-    return false;
-}
+        return false;
+    };
+    const PLUGIN_MIME_TYPE = 'application/x-mpv';
 
-function getPluginEntry(pluginDir, pluginName = 'mpvjs.node') {
     const fullPluginPath = path.join(pluginDir, pluginName);
+    console.log(fullPluginPath);
     let pluginPath = path.relative(process.cwd(), fullPluginPath);
     if (path.dirname(pluginPath) === '.') {
         if (process.platform === 'linux') {
@@ -45,17 +48,11 @@ function getPluginEntry(pluginDir, pluginName = 'mpvjs.node') {
         }
     }
     return `${pluginPath};${PLUGIN_MIME_TYPE}`;
-}
-
-const pdir = path.join(__dirname, '..', 'libs');
-
-if (process.platform !== 'linux') {
-    process.chdir(pdir);
-}
+};
 
 app.commandLine.appendSwitch('no-sandbox');
 app.commandLine.appendSwitch('ignore-gpu-blacklist');
-app.commandLine.appendSwitch('register-pepper-plugins', getPluginEntry(pdir));
+app.commandLine.appendSwitch('register-pepper-plugins', getPluginEntry(pluginDir));
 
 // Create the native browser window.
 function createWindow() {
