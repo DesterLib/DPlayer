@@ -4,14 +4,13 @@ import React from 'react';
 import Audio from './Audio';
 import Duration from './Duration';
 import Fullscreen from './Fullscreen';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+import MPV from './MPV';
 import Play from './Play';
 import { VideoSeekSlider } from './Seekbar';
 import Subtitle from './Subtitle';
 import Timer from './Timer';
 import Volume from './Volume';
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-import MPV from './MPV';
 
 type Props = {
     url: string;
@@ -21,6 +20,8 @@ type Props = {
     fullscreen: boolean;
     timePos: number;
     size: number;
+    style?: object;
+    className?: string;
 };
 
 type State = {
@@ -178,11 +179,10 @@ class Player extends React.Component<Props, State> {
     MPVPlayer = () => (
         <div
             style={{
-                display: 'grid',
-                gridTemplateColumns: '160px auto',
+                ...this.props.style,
                 width: '100%',
-                height: 90,
             }}
+            className={this.props.className}
         >
             <div
                 ref={this.playerContainerEl}
@@ -191,6 +191,10 @@ class Player extends React.Component<Props, State> {
             >
                 <div className='mpv-player'>
                     <MPV
+                        style={{
+                            width: '100%',
+                            aspectRatio: '21/9',
+                        }}
                         onReady={this.handleMPVReady}
                         onPropertyChange={this.handlePropertyChange}
                         onMouseDown={this.togglePause}

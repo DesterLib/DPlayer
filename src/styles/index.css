@@ -5,7 +5,7 @@
 }
 
 :root {
-    --primary-color: #2196f3;
+    --primary-color: #14dca0;
     --scrollbarBG: #f2f3f5;
     --thumbBG: #e3e5e8;
 }
@@ -175,6 +175,16 @@ input:focus {
     opacity: 1;
 }
 
+.MuiSlider-thumb {
+    color: #14dca0;
+}
+.MuiSlider-rail {
+    color: #14dca0;
+}
+.MuiSlider-track {
+    color: #14dca0;
+}
+
 .volume-slider {
     width: 150px;
     padding-top: 4px;
@@ -192,8 +202,7 @@ input:focus {
 }
 
 .player {
-    width: 160px;
-    height: 90px;
+    width: 100%;
 }
 
 .absolute-center {

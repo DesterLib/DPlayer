@@ -16,9 +16,21 @@ type Props = {
     fullscreen?: boolean;
     timePos?: number;
     size?: number;
+    style?: object;
+    className?: string;
 };
 
-const DPlayer = ({ url, title, subTitle, id, fullscreen, timePos, size }: Props) => {
+const DPlayer = ({
+    url,
+    title,
+    subTitle,
+    id,
+    fullscreen,
+    timePos,
+    size,
+    style,
+    className,
+}: Props) => {
     return (
         <Player
             url={url}
@@ -28,6 +40,8 @@ const DPlayer = ({ url, title, subTitle, id, fullscreen, timePos, size }: Props)
             fullscreen={fullscreen || false}
             timePos={timePos || 0}
             size={size || 0}
+            style={style}
+            className={className}
         />
     );
 };

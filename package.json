@@ -1,6 +1,6 @@
 {
     "name": "@desterlib/dplayer",
-    "version": "0.0.18",
+    "version": "0.0.19",
     "description": "Dester's desktop video player",
     "license": "MIT",
     "main": "dist/index.js",
@@ -10,9 +10,9 @@
         "start": "concurrently -k \"cross-env BROWSER=none react-app-rewired start\" \"wait-on http://localhost:3000 && electronmon .\"",
         "build": "cross-os build:pre && tsc && cross-os build:post",
         "release": "npm run build && npm pkg set main=dist/index.js && npm publish",
-        "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
+        "lint:check": "eslint src/**/*.{js,jsx,ts,tsx,json}",
         "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
-        "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
+        "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "cross-os": {
         "build:pre": {
