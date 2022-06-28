@@ -1,6 +1,6 @@
 {
     "name": "@desterlib/dplayer",
-    "version": "0.0.19",
+    "version": "0.0.21",
     "description": "Dester's desktop video player",
     "license": "MIT",
     "main": "dist/index.js",
@@ -23,11 +23,11 @@
         "build:post": {
             "darwin": "cp -r src/styles dist/styles",
             "linux": "cp -r src/styles dist/styles",
-            "win32": "robocopy src/styles dist/styles & robocopy node_modules/@desterlib/mpv/dist dist mpv.node mpv-1.dll || exit 0"
+            "win32": "robocopy src/styles dist/styles || exit 0"
         }
     },
     "dependencies": {
-        "@desterlib/mpv": "^0.34.9",
+        "@desterlib/mpv": "^0.34.12",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",
@@ -57,6 +57,11 @@
         "wait-on": "^6.0.1"
     },
     "contributors": [
+        {
+            "name": "pownthep",
+            "email": "pownthepofficial@gmail.com",
+            "url": "https://github.com/pownthep"
+        },
         {
             "name": "Elias Benbourenane",
             "email": "me@elias.eu.org",
